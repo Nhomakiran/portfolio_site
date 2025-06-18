@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="text-center mb-5">
+  <h1 class="display-4 fw-bold">Narrala Homakiran</h1>
+  <p class="lead">Associate Software Engineer | Python & Django Developer | AI & ML Enthusiast</p>
+  <a href="{% static 'pdfs/NARRALA_HOMAKIRAN_Resume.pdf' %}" class="btn btn-outline-primary mt-2" download>Download Resume</a>
+</div>
+
+<hr class="my-4"/>
+
+<section class="mb-5">
+  <h2 class="h5 text-primary">Career Objective</h2>
+  <p>I am an enthusiastic and adaptable individual eager to contribute technical and analytical skills to a dynamic team. Passionate about delivering high-quality, real-time solutions in AI, NLP, and full-stack development with Django.</p>
+</section>
+
+<section class="mb-5">
+  <h2 class="h5 text-primary">Technical Skills</h2>
+  <ul>
+    <li><strong>Languages:</strong> Python, SQL, HTML, CSS</li>
+    <li><strong>Frameworks:</strong> Django, Flask, Bootstrap, Streamlit</li>
+    <li><strong>Libraries:</strong> Pandas, NumPy, Scikit-Learn, Matplotlib</li>
+    <li><strong>Tools:</strong> Git, GitHub, Jupyter Notebook, VS Code</li>
+  </ul>
+</section>
+
+<section class="mb-5">
+  <h2 class="h5 text-primary">Projects</h2>
+  <div class="row">
+    {% for project in projects %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          {% if project.image %}
+          <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ project.title }}</h5>
+            <p class="card-text small"><strong>Tech Stack:</strong> {{ project.technologies }}</p>
+            <p class="card-text">{{ project.description }}</p>
+            {% if project.result %}<p class="text-muted"><strong>Result:</strong> {{ project.result }}</p>{% endif %}
+            {% if project.link %}<a href="{{ project.link }}" class="btn btn-sm btn-primary" target="_blank">View Project</a>{% endif %}
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No projects added yet. Add them via admin panel.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="mb-5">
+  <h2 class="h5 text-primary">Certifications & Achievements</h2>
+  <ul>
+    <li>AI & Machine Learning Foundation – Data Trained Academy</li>
+    <li>Google Data Analytics Certification – IBM</li>
+    <li>Python for Data Science – UDEMY</li>
+  </ul>
+</section>
+
+<section class="mb-5">
+  <h2 class="h5 text-primary">Education</h2>
+  <ul>
+    <li><strong>Bachelor of Technology</strong> in Mechanical Engineering at VelTech Technical University, Chennai (2015–2019)</li>
+    <li>Intermediate, Sri Chaitanya Junior College – MPC (2013–2015)</li>
+    <li>SSC, Sri Chaitanya Techno School – 9.3 CGPA (2012–2013)</li>
+  </ul>
+</section>
+
+<section class="mb-5">
+  <h2 class="h5 text-primary">Contact Me</h2>
+  <form method="post" action="" class="bg-light p-4 rounded shadow-sm">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <div class="mb-3">
+      <label for="message" class="form-label">Message</label>
+      <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send Message</button>
+  </form>
+</section>
+<section class="text-center mt-5">
+  <a href="https://github.com/homakiran04" target="_blank" class="btn btn-outline-dark btn-sm me-2">GitHub</a>
+  <a href="https://linkedin.com/in/homakiran" target="_blank" class="btn btn-outline-primary btn-sm me-2">LinkedIn</a>
+  <a href="mailto:homakiran.45@gmail.com" class="btn btn-outline-success btn-sm">Email Me</a>
+</section>
+{% endblock %}
